@@ -1,0 +1,489 @@
+﻿<Page x:Class="Valil.Chess.WinFX.SettingsPage"
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+	Title="Valil.Chess.WinFX - Settings"
+  WindowTitle="Valil.Chess.WinFX - Settings"
+	Loaded="PageLoaded"
+	Unloaded="PageUnloaded"
+  SnapsToDevicePixels="True"
+  >
+  <Page.Resources>
+    <!-- Defines the settings label style -->
+    <Style x:Key="Valil.Chess.SettingsLabelStyle" TargetType="{x:Type Label}">
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="BorderBrush" Value="Black" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="FontFamily" Value="Arial" />
+      <Setter Property="FontSize" Value="12pt" />
+      <Setter Property="FontStyle" Value="Normal" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="Foreground" Value="Black" />
+      <Setter Property="Background">
+        <Setter.Value>
+          <LinearGradientBrush>
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Color="#dddddd" Offset="0"/>
+              <GradientStop Color="#ffffff" Offset="1"/>
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!-- Defines the settings button style -->
+    <Style x:Key="Valil.Chess.SettingsButtonStyle" TargetType="{x:Type Button}">
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="Background" Value="White" />
+      <Setter Property="BorderBrush" Value="Silver" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="HorizontalContentAlignment" Value="Center" />
+      <Setter Property="VerticalContentAlignment" Value="Center" />
+      <Setter Property="Padding" Value="2" />
+      <Setter Property="FontFamily" Value="Arial" />
+      <Setter Property="FontSize" Value="12pt" />
+      <Setter Property="FontStyle" Value="Normal" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="Foreground" Value="Black" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Button}">
+            <Border 
+              x:Name="OuterBorder" 
+              Margin="1" 
+              CornerRadius="2" 
+              BorderBrush="{TemplateBinding BorderBrush}" 
+              Background="{TemplateBinding Background}" 
+              BorderThickness="{TemplateBinding BorderThickness}">
+              <Border 
+                x:Name="InnerBorder" 
+                CornerRadius="2" 
+                Padding="{TemplateBinding Padding}">
+                <Border.Background>
+                  <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                    <LinearGradientBrush.GradientStops>
+                      <GradientStop Offset="0" Color="Transparent"/>
+                      <GradientStop Offset="1" Color="#33000000"/>
+                    </LinearGradientBrush.GradientStops>
+                  </LinearGradientBrush>
+                </Border.Background>
+                <ContentPresenter 
+                  x:Name="ContentSite" 
+                  HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                  VerticalAlignment="{TemplateBinding VerticalContentAlignment}" />
+              </Border>
+            </Border>
+            <ControlTemplate.Triggers>
+              <Trigger 
+                Property="IsFocused" 
+                Value="true">
+                <Setter 
+                  TargetName="OuterBorder" 
+                  Property="BorderBrush" 
+                  Value="Black" />
+              </Trigger>
+              <Trigger Property="IsMouseOver" Value="true">
+                <Setter 
+                  TargetName="InnerBorder"  
+                  Property="Background">
+                  <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                      <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0" Color="#88FFFFFF"/>
+                        <GradientStop Offset="1" Color="#20000000"/>
+                      </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                  </Setter.Value>
+                </Setter>
+                <Setter 
+                  TargetName="OuterBorder" 
+                  Property="BorderBrush" 
+                  Value="Gray" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="true">
+                <Setter 
+                  TargetName="InnerBorder"  
+                  Property="Background">
+                  <Setter.Value>
+                    <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                      <LinearGradientBrush.GradientStops>
+                        <GradientStop Offset="0" Color="#10000000"/>
+                        <GradientStop Offset="1" Color="#20000000"/>
+                      </LinearGradientBrush.GradientStops>
+                    </LinearGradientBrush>
+                  </Setter.Value>
+                </Setter>
+              </Trigger>
+              <Trigger Property="IsDefaulted" Value="true">
+                <Setter 
+                  TargetName="OuterBorder" 
+                  Property="BorderBrush" 
+                  Value="Black" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="false">
+                <Setter 
+                  TargetName="InnerBorder" 
+                  Property="Background" 
+                  Value="#EEEEEE"  />
+                <Setter Property="BorderBrush" Value="Silver"  />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+          <Setter Property="Foreground" Value="Gray" />
+        </Trigger>
+        <Trigger Property="Width" Value="Auto">
+          <Setter Property="MinWidth" Value="75" />
+        </Trigger>
+        <Trigger Property="Height" Value="Auto">
+          <Setter Property="MinHeight" Value="23" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <!-- Defines the settings radio button style -->
+    <Style x:Key="Valil.Chess.SettingsRadioButtonStyle" TargetType="{x:Type RadioButton}">
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="Background">
+        <Setter.Value>
+          <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+            <LinearGradientBrush.GradientStops>
+              <GradientStop Offset="0" Color="White"/>
+              <GradientStop Offset="1" Color="#CDCDCD"/>
+            </LinearGradientBrush.GradientStops>
+          </LinearGradientBrush>
+        </Setter.Value>
+      </Setter>
+      <Setter Property="BorderBrush" Value="Silver" />
+      <Setter Property="FontFamily" Value="Arial" />
+      <Setter Property="FontSize" Value="12pt" />
+      <Setter Property="FontStyle" Value="Normal" />
+      <Setter Property="FontWeight" Value="Normal" />
+      <Setter Property="Foreground" Value="Black" />
+      <Setter Property="Padding" Value="3,1,0,0" />
+      <Setter Property="Margin" Value="0,2,0,2" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RadioButton}">
+            <BulletDecorator Background="Transparent">
+              <BulletDecorator.Bullet>
+                <Grid>
+                  <Ellipse x:Name="OuterCircle" Width="12" Height="12" 
+                        Fill="{TemplateBinding Background}" 
+                        StrokeThickness="1" 
+                        Stroke="{TemplateBinding BorderBrush}" />
+                  <Ellipse x:Name="InnerCircle" Width="6"  
+                           Height="6" Fill="Gray" />
+                </Grid>
+              </BulletDecorator.Bullet>
+              <ContentPresenter Margin="{TemplateBinding Padding}"
+                 VerticalAlignment="{TemplateBinding VerticalContentAlignment}" 
+                 HorizontalAlignment="{TemplateBinding HorizontalContentAlignment}" 
+                 RecognizesAccessKey="True" />
+            </BulletDecorator>
+            <ControlTemplate.Triggers>
+              <Trigger Property="IsChecked" Value="false">
+                <Setter TargetName="InnerCircle" Property="Visibility" 
+                    Value="Collapsed" />
+              </Trigger>
+              <Trigger Property="IsPressed" Value="true">
+                <Setter TargetName="OuterCircle" Property="Fill" 
+                    Value="#F4F4F4" />
+              </Trigger>
+              <Trigger Property="IsEnabled" Value="false">
+                <Setter TargetName="OuterCircle" Property="Fill" 
+                    Value="Silver" />
+                <Setter TargetName="InnerCircle" Property="Fill" 
+                    Value="Silver" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsEnabled" Value="false">
+          <Setter Property="Foreground" Value="Silver" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <!-- Defines the settings slider style -->
+    <Style x:Key="Slider_RepeatButton" TargetType="{x:Type RepeatButton}">
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="IsTabStop" Value="false" />
+      <Setter Property="Focusable" Value="false" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type RepeatButton}">
+            <Border Background="Transparent" />
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <Style x:Key="Slider_Thumb" TargetType="{x:Type Thumb}">
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="Width" Value="14" />
+      <Setter Property="Height" Value="14" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Thumb}">
+            <Ellipse Stroke="Silver" StrokeThickness="1">
+              <Ellipse.Fill>
+                <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                  <LinearGradientBrush.GradientStops>
+                    <GradientStop Offset="0" Color="White"/>
+                    <GradientStop Offset="1" Color="#CDCDCD"/>
+                  </LinearGradientBrush.GradientStops>
+                </LinearGradientBrush>
+              </Ellipse.Fill>
+            </Ellipse>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="IsDragging" Value="true">
+          <Setter Property="Background">
+            <Setter.Value>
+              <LinearGradientBrush StartPoint="0,0" EndPoint="1,0">
+                <LinearGradientBrush.GradientStops>
+                  <GradientStop Offset="0" Color="White"/>
+                  <GradientStop Offset="1" Color="#E0E0E0"/>
+                </LinearGradientBrush.GradientStops>
+              </LinearGradientBrush>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+        <Trigger Property="IsEnabled" Value="false">
+          <Setter Property="Background" Value="#E4E4E4" />
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+    <Style x:Key="Valil.Chess.SettingsSliderStyle" TargetType="{x:Type Slider}">
+      <Setter Property="OverridesDefaultStyle" Value="true" />
+      <Setter Property="Background" Value="#E4E4E4" />
+      <Setter Property="BorderThickness" Value="1" />
+      <Setter Property="BorderBrush" Value="Silver" />
+      <Setter Property="Foreground" Value="Gray" />
+      <Setter Property="MinWidth" Value="11" />
+      <Setter Property="MinHeight" Value="24" />
+      <Setter Property="Width" Value="150" />
+      <Setter Property="Height" Value="Auto" />
+      <Setter Property="Template">
+        <Setter.Value>
+          <ControlTemplate TargetType="{x:Type Slider}">
+            <Grid ClipToBounds="false">
+              <Grid.ColumnDefinitions>
+                <ColumnDefinition Width="*" />
+              </Grid.ColumnDefinitions>
+              <Grid.RowDefinitions>
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="Auto" 
+                   MinHeight="{TemplateBinding Slider.MinHeight}" />
+                <RowDefinition Height="Auto" />
+                <RowDefinition Height="*" />
+              </Grid.RowDefinitions>
+              <TickBar x:Name="TopTick" Grid.Row="0" Placement="Top" 
+                  Fill="{TemplateBinding Foreground}" 
+                  Height="4" Visibility="Collapsed" />
+              <Border Height="4" Grid.Row="1" CornerRadius="2" 
+                   Background="{TemplateBinding Background}" 
+                   BorderBrush="{TemplateBinding BorderBrush}" 
+                   BorderThickness="{TemplateBinding BorderThickness}" 
+                   Width="{TemplateBinding Width}"/>
+              <Canvas Grid.Row="1" VerticalAlignment="Center" Height="4">
+                <Rectangle x:Name="PART_SelectionRange" Canvas.Top="1" 
+                    Fill="{TemplateBinding Foreground}" Height="2.0" 
+                    Visibility="Hidden" />
+              </Canvas>
+              <Track Grid.Row="1" Name="PART_Track">
+                <Track.Thumb>
+                  <Thumb Style="{StaticResource Slider_Thumb}" />
+                </Track.Thumb>
+                <Track.DecreaseRepeatButton>
+                  <RepeatButton Style="{StaticResource Slider_RepeatButton}" Command="Slider.DecreaseLarge"/>
+                </Track.DecreaseRepeatButton>
+                <Track.IncreaseRepeatButton>
+                  <RepeatButton Style="{StaticResource Slider_RepeatButton}" Command="Slider.IncreaseLarge"/>
+                </Track.IncreaseRepeatButton>
+              </Track>
+              <TickBar x:Name="BottomTick" Grid.Row="2" 
+                    Fill="{TemplateBinding Foreground}" Placement="Bottom" 
+                    Height="4" Visibility="Collapsed"  />
+            </Grid>
+            <ControlTemplate.Triggers>
+              <Trigger Property="TickPlacement" Value="TopLeft">
+                <Setter TargetName="TopTick" Property="Visibility" 
+                   Value="Visible" />
+              </Trigger>
+              <Trigger Property="TickPlacement" 
+                   Value="BottomRight">
+                <Setter TargetName="BottomTick" Property="Visibility" 
+                   Value="Visible" />
+              </Trigger>
+              <Trigger Property="TickPlacement" Value="Both">
+                <Setter TargetName="TopTick" Property="Visibility" 
+                    Value="Visible" />
+                <Setter TargetName="BottomTick" Property="Visibility" 
+                    Value="Visible" />
+              </Trigger>
+              <Trigger Property="IsSelectionRangeEnabled" 
+                    Value="true">
+                <Setter TargetName="PART_SelectionRange" 
+                    Property="Visibility" Value="Visible" />
+              </Trigger>
+            </ControlTemplate.Triggers>
+          </ControlTemplate>
+        </Setter.Value>
+      </Setter>
+      <Style.Triggers>
+        <Trigger Property="Orientation" Value="Vertical">
+          <Setter Property="MinHeight" Value="11" />
+          <Setter Property="Height" Value="104" />
+          <Setter Property="MinWidth" Value="24" />
+          <Setter Property="Width" Value="Auto" />
+          <Setter Property="Template">
+            <Setter.Value>
+              <ControlTemplate TargetType="{x:Type Slider}">
+                <Grid ClipToBounds="false">
+                  <Grid.RowDefinitions>
+                    <RowDefinition Height="*" />
+                  </Grid.RowDefinitions>
+                  <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="Auto" 
+                        MinWidth="{TemplateBinding Slider.MinHeight}" />
+                    <ColumnDefinition Width="Auto" />
+                    <ColumnDefinition Width="*" />
+                  </Grid.ColumnDefinitions>
+                  <TickBar x:Name="LeftTick" Grid.Column="0" 
+                      Placement="Left" Fill="{TemplateBinding Foreground}" 
+                      Width="4" Visibility="Collapsed" />
+                  <Border Width="4" Grid.Column="1" CornerRadius="2" 
+                       Background="{TemplateBinding Background}" 
+                       BorderBrush="{TemplateBinding BorderBrush}" 
+                       BorderThickness="{TemplateBinding BorderThickness}" 
+                       Height="{TemplateBinding Height}"/>
+                  <Canvas Grid.Column="1" HorizontalAlignment="Center" Width="4">
+                    <Rectangle x:Name="PART_SelectionRange" Canvas.Right="1" 
+                       Fill="{TemplateBinding Foreground}" Width="2" 
+                       Visibility="Hidden" />
+                  </Canvas>
+                  <Track Grid.Column="1" Name="PART_Track">
+                    <Track.Thumb>
+                      <Thumb Style="{StaticResource Slider_Thumb}" />
+                    </Track.Thumb>
+                    <Track.DecreaseRepeatButton>
+                      <RepeatButton>
+                        <RepeatButton.Resources>
+                          <Style BasedOn="{StaticResource Slider_RepeatButton}" 
+                                 TargetType="{x:Type RepeatButton}">
+                            <Setter Property="Command" Value="Slider.DecreaseLarge" />
+                          </Style>
+                        </RepeatButton.Resources>
+                      </RepeatButton>
+                    </Track.DecreaseRepeatButton>
+                    <Track.IncreaseRepeatButton>
+                      <RepeatButton>
+                        <RepeatButton.Resources>
+                          <Style BasedOn="{StaticResource Slider_RepeatButton}" 
+                                 TargetType="{x:Type RepeatButton}">
+                            <Setter Property="Command" Value="Slider.IncreaseLarge" />
+                          </Style>
+                        </RepeatButton.Resources>
+                      </RepeatButton>
+                    </Track.IncreaseRepeatButton>
+                  </Track>
+                  <TickBar x:Name="RightTick" Grid.Column="2" 
+                        Fill="{TemplateBinding Foreground}" 
+                        Placement="Right" Width="4" Visibility="Collapsed"  />
+                </Grid>
+                <ControlTemplate.Triggers>
+                  <Trigger Property="TickPlacement" Value="TopLeft">
+                    <Setter TargetName="LeftTick" Property="Visibility"   
+                       Value="Visible" />
+                  </Trigger>
+                  <Trigger Property="TickPlacement" Value="BottomRight">
+                    <Setter TargetName="RightTick" Property="Visibility" 
+                       Value="Visible" />
+                  </Trigger>
+                  <Trigger Property="TickPlacement" Value="Both">
+                    <Setter TargetName="LeftTick" Property="Visibility" 
+                       Value="Visible" />
+                    <Setter TargetName="RightTick" Property="Visibility" 
+                       Value="Visible" />
+                  </Trigger>
+                  <Trigger Property="IsSelectionRangeEnabled" Value="true">
+                    <Setter TargetName="PART_SelectionRange" 
+                        Property="Visibility" Value="Visible" />
+                  </Trigger>
+                </ControlTemplate.Triggers>
+              </ControlTemplate>
+            </Setter.Value>
+          </Setter>
+        </Trigger>
+      </Style.Triggers>
+    </Style>
+  </Page.Resources>
+  <!-- Settings page uses two-way databinding to opponents settings-->
+  <StackPanel Name="panel">
+    <Label Style="{StaticResource Valil.Chess.SettingsLabelStyle}"
+			Width="300" Margin="5"
+			>
+      Game settings
+    </Label>
+    <UniformGrid Width="300" Rows="3" Columns="1">
+      <RadioButton Style="{StaticResource Valil.Chess.SettingsRadioButtonStyle}"
+					IsChecked="{Binding Path=TwoPlayersMode, Mode=TwoWay}"
+					Name="twoPlayerRdoBtn" 
+					Margin="2"
+					>
+        Two-player mode
+      </RadioButton>
+      <RadioButton Style="{StaticResource Valil.Chess.SettingsRadioButtonStyle}"
+				IsChecked="{Binding Path=WebServiceOpponent, Mode=TwoWay}"
+				Name="wsEngineRdoBtn" 
+				Margin="2"
+				>
+        Play against the web service
+      </RadioButton>
+    </UniformGrid>
+    <Slider Style="{StaticResource Valil.Chess.SettingsSliderStyle}"
+			    Value="{Binding Path=AIOpponentLevel, Mode=TwoWay}"
+				Name="aiLevelHSlider"
+				Orientation="Horizontal"
+				Minimum="1" Maximum="5" 
+				IsSnapToTickEnabled="True" TickFrequency="1" TickPlacement="BottomRight" 
+				AutoToolTipPlacement="BottomRight"
+				BorderBrush="Black" BorderThickness="1"
+				ToolTip="Difficulty level"
+				Width="300" 
+				Margin="5"
+			>
+      <Slider.Background>
+        <LinearGradientBrush>
+          <LinearGradientBrush.GradientStops>
+            <GradientStop Color="#dddddd" Offset="0"/>
+            <GradientStop Color="#ffffff" Offset="1"/>
+          </LinearGradientBrush.GradientStops>
+        </LinearGradientBrush>
+      </Slider.Background>
+    </Slider>
+    <UniformGrid Width="300" Margin="5" Rows="1" Columns="2">
+      <Button Style="{StaticResource Valil.Chess.SettingsButtonStyle}" 
+				Name="resetBtn" 
+				Margin="2"
+				Click="ResetClick"
+				>
+        Reset
+      </Button>
+      <Button Style="{StaticResource Valil.Chess.SettingsButtonStyle}" 
+				Name="saveBtn" 
+				Margin="2"
+				Click="SaveClick"
+				IsEnabled="False"
+				>
+        Save
+      </Button>
+    </UniformGrid>
+  </StackPanel>
+</Page>

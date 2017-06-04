@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<ordesignerObjectsDiagram dslVersion="1.0.0.0" absoluteBounds="0, 0, 11, 9.625" name="KnowledgeBaseDataContext">
+  <DataContextMoniker Name="/KnowledgeBaseDataContextDataContext" />
+  <nestedChildShapes>
+    <classShape Id="fdb9b06a-ea1d-4f65-b52b-98414b8f7886" absoluteBounds="0.75, 6.125, 2, 3.3093082682291675">
+      <DataClassMoniker Name="/KnowledgeBaseDataContextDataContext/Article" />
+      <nestedChildShapes>
+        <elementListCompartment Id="90cf0c9f-0650-4ba5-8184-29c9e35f5fca" absoluteBounds="0.765, 6.585, 1.9700000000000002, 2.7493082682291665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="3eb8965d-8cbf-4b21-be47-74dcfb1b0ca0" absoluteBounds="0.75, 0.875, 2, 2.1554996744791666">
+      <DataClassMoniker Name="/KnowledgeBaseDataContextDataContext/Category" />
+      <nestedChildShapes>
+        <elementListCompartment Id="6c20e599-cd47-4c7c-b2f0-31bc6ef5b242" absoluteBounds="0.765, 1.335, 1.9700000000000002, 1.5954996744791665" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <classShape Id="f0eb616d-b031-4b82-b106-71db530a6a47" absoluteBounds="3.5, 1.375, 2, 1.3862939453125003">
+      <DataClassMoniker Name="/KnowledgeBaseDataContextDataContext/ArticleCategoryMapping" />
+      <nestedChildShapes>
+        <elementListCompartment Id="42330aeb-0e2a-4d78-98ec-30cda001aa99" absoluteBounds="3.515, 1.835, 1.9700000000000002, 0.8262939453125" name="DataPropertiesCompartment" titleTextColor="Black" itemTextColor="Black" />
+      </nestedChildShapes>
+    </classShape>
+    <associationConnector edgePoints="[(1.45923076923077 : 3.03049967447917); (1.45923076923077 : 3.28049967447917); (2.05461538461538 : 3.28049967447917); (2.05461538461538 : 3.03049967447917)]" fixedFrom="NotFixed" fixedTo="NotFixed">
+      <AssociationMoniker Name="/KnowledgeBaseDataContextDataContext/Category/Category_Category" />
+      <nodes>
+        <classShapeMoniker Id="3eb8965d-8cbf-4b21-be47-74dcfb1b0ca0" />
+        <classShapeMoniker Id="3eb8965d-8cbf-4b21-be47-74dcfb1b0ca0" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 7.77965413411458); (4.5 : 7.77965413411458); (4.5 : 2.7612939453125)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KnowledgeBaseDataContextDataContext/Article/Article_ArticleCategoryMapping" />
+      <nodes>
+        <classShapeMoniker Id="fdb9b06a-ea1d-4f65-b52b-98414b8f7886" />
+        <classShapeMoniker Id="f0eb616d-b031-4b82-b106-71db530a6a47" />
+      </nodes>
+    </associationConnector>
+    <associationConnector edgePoints="[(2.75 : 2.06814697265625); (3.5 : 2.06814697265625)]" fixedFrom="Algorithm" fixedTo="Algorithm">
+      <AssociationMoniker Name="/KnowledgeBaseDataContextDataContext/Category/Category_ArticleCategoryMapping" />
+      <nodes>
+        <classShapeMoniker Id="3eb8965d-8cbf-4b21-be47-74dcfb1b0ca0" />
+        <classShapeMoniker Id="f0eb616d-b031-4b82-b106-71db530a6a47" />
+      </nodes>
+    </associationConnector>
+  </nestedChildShapes>
+</ordesignerObjectsDiagram>

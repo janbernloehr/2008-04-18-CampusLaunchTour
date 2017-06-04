@@ -1,0 +1,134 @@
+﻿<Window
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    x:Class="WPF_Demo_2.Window1"
+    Title="Window1" Height="411" Width="607" xmlns:d="http://schemas.microsoft.com/expression/blend/2008" xmlns:mc="http://schemas.openxmlformats.org/markup-compatibility/2006" mc:Ignorable="d">
+	<Window.Background>
+		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+			<GradientStop Color="#FF000000" Offset="0"/>
+			<GradientStop Color="#FF602929" Offset="1"/>
+		</LinearGradientBrush>
+	</Window.Background>
+    <Grid>
+        <Grid.ColumnDefinitions>
+            <ColumnDefinition Width="0.804*" />
+            <ColumnDefinition Width="0.196*" />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+            <RowDefinition Height="*" />
+            <RowDefinition Height="Auto" MinHeight="94.8" />
+        </Grid.RowDefinitions>
+        <ListBox Grid.Row="0" Grid.Column="0" d:LayoutOverrides="GridBox" Margin="0,99,0.367,-22.792" RenderTransformOrigin="0.5,0.5">
+        	<ListBox.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform ScaleX="1" ScaleY="1"/>
+        			<SkewTransform AngleX="0" AngleY="0"/>
+        			<RotateTransform Angle="-27.559"/>
+        			<TranslateTransform X="11.981357019996388" Y="23.842800107528014"/>
+        		</TransformGroup>
+        	</ListBox.RenderTransform>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+            <ListBoxItem Content="Lorem ipsum dolor sit amet, consectetuer adipiscing elit. Fusce pharetra malusuada augue."/>
+        </ListBox>
+        <Button Grid.Row="1" Grid.Column="1" VerticalAlignment="Top" Margin="-0.367,6.834,7,0" Height="15.987" Content="Button" RenderTransformOrigin="0.5,0.5">
+        	<Button.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform ScaleX="1" ScaleY="1"/>
+        			<SkewTransform AngleX="0" AngleY="0"/>
+        			<RotateTransform Angle="-27.559"/>
+        			<TranslateTransform X="22.354203640965551" Y="-121.92321060113139"/>
+        		</TransformGroup>
+        	</Button.RenderTransform>
+        </Button>
+        <WrapPanel Grid.Row="1" Grid.Column="0" Margin="0,22.773,0.367,0" VerticalAlignment="Top" Height="61.008" RenderTransformOrigin="0.5,0.5">
+        	<WrapPanel.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform ScaleX="1" ScaleY="1"/>
+        			<SkewTransform AngleX="0" AngleY="0"/>
+        			<RotateTransform Angle="-27.559"/>
+        			<TranslateTransform X="73.274787325739709" Y="8.8109410096086549"/>
+        		</TransformGroup>
+        	</WrapPanel.RenderTransform>
+            <Button Content="Foo"/>
+            <Button Content="Bar"/>
+            <Button Content="Baz"/>
+            <Button Content="Bat"/>
+            <Button Content="Foobar"/>
+            <Button Content="Barbaz"/>
+            <Button Content="Bazbat"/>
+            <Button Content="Foobarbaz"/>
+            <Button Content="Barbazbat"/>
+            <Button Content="Foobarbazbat"/>
+            <Button VerticalAlignment="Bottom" Content="Foo"/>
+            <Button VerticalAlignment="Top" Content="Bar"/>
+            <Button Height="40" Content="Baz"/>
+            <Button VerticalAlignment="Center" Content="Bat"/>
+            <Button VerticalAlignment="Center" Content="Foobar"/>
+            <Button Content="Barbaz"/>
+            <Button Content="Bazbat"/>
+            <Button Content="Foobarbaz">
+                <!--
+                LayoutTransform transformiert ein Element bevor seine Größe berechnet wird.
+                Somit wird sichergestellt, dass das Element genug Platz für die Transformation hat.
+                -->
+                <Button.LayoutTransform>
+                    <RotateTransform Angle="90" />
+                </Button.LayoutTransform>
+            </Button>
+            <Button Content="Barbazbat">
+                <!--
+                RenderTransform transformiert ein Element ohne dessen Layout zu beeinflussen.
+                Somit kann z.b. ein skaliertes bzw. gedrehtes andere Elemente überlappen.
+                -->
+                
+                <Button.RenderTransform>
+                    <RotateTransform Angle="20" />
+                </Button.RenderTransform>
+            </Button>
+            <Button Content="Foobarbazbat"/>
+        </WrapPanel>
+        <Rectangle Margin="10,13,19,0" VerticalAlignment="Top" Height="63" Stroke="{x:Null}" Grid.ColumnSpan="2" RadiusY="5.5" RadiusX="5.5" RenderTransformOrigin="0.5,0.5">
+        	<Rectangle.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform ScaleX="1" ScaleY="1"/>
+        			<SkewTransform AngleX="0" AngleY="0"/>
+        			<RotateTransform Angle="-27.559"/>
+        			<TranslateTransform X="-66.505202072962419" Y="16.800504391720651"/>
+        		</TransformGroup>
+        	</Rectangle.RenderTransform>
+        	<Rectangle.Fill>
+        		<LinearGradientBrush EndPoint="0.5,1" StartPoint="0.5,0">
+        			<GradientStop Color="#FFFF0000" Offset="0"/>
+        			<GradientStop Color="#FF5C0000" Offset="1"/>
+        		</LinearGradientBrush>
+        	</Rectangle.Fill>
+        </Rectangle>
+        <TextBlock Margin="28,24,41.164,0" VerticalAlignment="Top" Height="45" TextWrapping="Wrap" FontFamily="Showcard Gothic" Foreground="#FFFFFFFF" FontSize="36" RenderTransformOrigin="0.5,0.5">
+        	<TextBlock.RenderTransform>
+        		<TransformGroup>
+        			<ScaleTransform ScaleX="1" ScaleY="1"/>
+        			<SkewTransform AngleX="0" AngleY="0"/>
+        			<RotateTransform Angle="-27.559"/>
+        			<TranslateTransform X="-58.7719713476707" Y="44.333279906128567"/>
+        		</TransformGroup>
+        	</TextBlock.RenderTransform><Run Language="de-de" Text="Hallo Freiburg"/></TextBlock>
+    </Grid>
+</Window>

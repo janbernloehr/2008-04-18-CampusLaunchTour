@@ -1,0 +1,157 @@
+﻿<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003" ToolsVersion="3.5">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProjectGuid>{0A0119FB-EF1D-4F86-9A71-4B0DA16A26C7}</ProjectGuid>
+    <ProjectTypeGuids>{60dc8134-eba5-43b8-bcc9-bb4bc16c2548};{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}</ProjectTypeGuids>
+    <RootNamespace>Valil.Chess.WinFX</RootNamespace>
+    <AssemblyName>Valil.Chess.WinFX</AssemblyName>
+    <WarningLevel>4</WarningLevel>
+    <OutputType>winexe</OutputType>
+    <ApplicationVersion>1.0.0.*</ApplicationVersion>
+    <!-- Most people will use Publish dialog in Visual Studio to increment this -->
+    <BootstrapperEnabled>false</BootstrapperEnabled>
+    <UICulture>en-US</UICulture>
+    <SignAssembly>true</SignAssembly>
+    <AssemblyOriginatorKeyFile>chess.snk</AssemblyOriginatorKeyFile>
+    <TargetZone>LocalIntranet</TargetZone>
+    <GenerateManifests>true</GenerateManifests>
+    <SignManifests>true</SignManifests>
+    <ManifestCertificateThumbprint>405E6551E41E471B81456271F0A9FE2D1701DFFD</ManifestCertificateThumbprint>
+    <ManifestKeyFile>Valil.Chess.WinFX_TemporaryKey.pfx</ManifestKeyFile>
+    <TargetFrameworkVersion>v3.0</TargetFrameworkVersion>
+    <FileUpgradeFlags>
+    </FileUpgradeFlags>
+    <OldToolsVersion>2.0</OldToolsVersion>
+    <UpgradeBackupLocation>
+    </UpgradeBackupLocation>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>.\bin\Debug\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugSymbols>false</DebugSymbols>
+    <Optimize>true</Optimize>
+    <OutputPath>.\bin\Release\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="System" />
+    <Reference Include="System.Deployment" />
+    <Reference Include="System.Speech" />
+    <Reference Include="System.Windows.Forms" />
+    <Reference Include="System.XML" />
+    <Reference Include="WindowsBase" />
+    <Reference Include="PresentationCore" />
+    <Reference Include="PresentationFramework" />
+    <Reference Include="UIAutomationProvider" />
+    <Reference Include="UIAutomationTypes" />
+    <Reference Include="ReachFramework" />
+  </ItemGroup>
+  <ItemGroup>
+    <ApplicationDefinition Include="App.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </ApplicationDefinition>
+    <Compile Include="App.xaml.cs">
+      <DependentUpon>App.xaml</DependentUpon>
+      <SubType>Code</SubType>
+    </Compile>
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Chess2DPage.xaml.cs">
+      <DependentUpon>Chess2DPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Chess3DPage.xaml.cs">
+      <DependentUpon>Chess3DPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomCommands.cs" />
+    <Compile Include="GameLoadSaveOperationsManager.cs">
+      <SubType>Component</SubType>
+    </Compile>
+    <Compile Include="GameLoadSaveOperationsManager.Designer.cs">
+      <DependentUpon>GameLoadSaveOperationsManager.cs</DependentUpon>
+    </Compile>
+    <Compile Include="GamesLocationHandler.cs" />
+    <Compile Include="MainPage.xaml.cs">
+      <DependentUpon>MainPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="GameLoadSaveOperationsManager.resx">
+      <DependentUpon>GameLoadSaveOperationsManager.cs</DependentUpon>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="Properties\Resources.en-US.resx">
+      <Generator>ResXFileCodeGenerator</Generator>
+      <SubType>Designer</SubType>
+      <LastGenOutput>Resources.en-US.Designer.cs</LastGenOutput>
+    </EmbeddedResource>
+    <Compile Include="Properties\Resources.en-US.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>Resources.en-US.resx</DependentUpon>
+    </Compile>
+    <Compile Include="Properties\Settings.Designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTimeSharedInput>True</DesignTimeSharedInput>
+      <DependentUpon>Settings.settings</DependentUpon>
+    </Compile>
+    <Compile Include="SettingsPage.xaml.cs">
+      <DependentUpon>SettingsPage.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="SpeechRecognitionManager.cs" />
+    <Compile Include="TTSManager.cs" />
+    <None Include="chess.snk" />
+    <None Include="Properties\Settings.settings">
+      <Generator>SettingsSingleFileGenerator</Generator>
+      <LastGenOutput>Settings.Designer.cs</LastGenOutput>
+    </None>
+    <AppDesigner Include="Properties\" />
+  </ItemGroup>
+  <ItemGroup>
+    <Resource Include="chess.jpg">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Resource>
+    <None Include="app.config" />
+    <None Include="license.txt" />
+    <None Include="Valil.Chess.WinFX_TemporaryKey.pfx" />
+    <BaseApplicationManifest Include="Properties\app.manifest" />
+  </ItemGroup>
+  <ItemGroup>
+    <Page Include="Chess2DPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="Chess3DPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="MainPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+    <Page Include="SettingsPage.xaml">
+      <Generator>MSBuild:Compile</Generator>
+      <SubType>Designer</SubType>
+    </Page>
+  </ItemGroup>
+  <ItemGroup>
+    <ProjectReference Include="..\Valil.Chess.Model\Valil.Chess.Model.csproj">
+      <Project>{FE061FAE-37C2-4BC7-B6CA-F146325D032E}</Project>
+      <Name>Valil.Chess.Model</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Valil.Chess.Opponents\Valil.Chess.Opponents.csproj">
+      <Project>{7DE7A7B0-2CC5-4531-91CC-5EDEB79C7875}</Project>
+      <Name>Valil.Chess.Opponents</Name>
+    </ProjectReference>
+    <ProjectReference Include="..\Valil.Chess.WinFX.VisualElements\Valil.Chess.WinFX.VisualElements.csproj">
+      <Project>{2BEE754B-5A73-4507-9405-F062839BE55C}</Project>
+      <Name>Valil.Chess.WinFX.VisualElements</Name>
+    </ProjectReference>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+</Project>

@@ -1,0 +1,45 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Database Name="KnowledgeCenter" EntityNamespace="CampusLaunch.Linq.LinqToSql" ContextNamespace="CampusLaunch.Linq.LinqToSql" Class="KnowledgeBaseDataContextDataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="AppSettings" ConnectionString="Data Source=.;Initial Catalog=KnowledgeCenter;Integrated Security=True" SettingsObjectName="_05___Linq_To_Sql.Properties.Settings" SettingsPropertyName="KnowledgeCenterConnectionString" Provider="System.Data.SqlClient" />
+  <Table Name="dbo.Articles" Member="Articles">
+    <Type Name="Article">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="Teaser" Type="System.String" DbType="NVarChar(2000)" CanBeNull="true" />
+      <Column Name="Text" Type="System.String" DbType="NVarChar(MAX) NOT NULL" CanBeNull="false" />
+      <Column Name="Views" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="Rating" Type="System.Double" DbType="Float" CanBeNull="true" />
+      <Column Name="AuthorName" Type="System.String" DbType="NVarChar(256) NOT NULL" CanBeNull="false" />
+      <Column Name="IsPublished" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
+      <Column Name="DateCreated" Type="System.DateTime" DbType="DateTime NOT NULL" CanBeNull="false" />
+      <Column Name="DateEdit" Type="System.DateTime" DbType="DateTime" CanBeNull="true" />
+      <Column Name="[Level]" Member="Level" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="FriendlyUrl" Type="System.String" DbType="NVarChar(1000)" CanBeNull="true" />
+      <Column Name="OldId" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Association Name="Article_ArticleCategoryMapping" Member="ArticleCategoryMappings" OtherKey="ArticleId" Type="ArticleCategoryMapping" />
+    </Type>
+  </Table>
+  <Table Name="dbo.Categories" Member="Categories">
+    <Type Name="Category">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ParentId" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="Title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="FriendlyUrl" Type="System.String" DbType="NVarChar(1000) NOT NULL" CanBeNull="false" />
+      <Column Name="OldId" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="LongTitle" Type="System.String" DbType="NVarChar(255)" CanBeNull="true" />
+      <Column Name="OrderIndex" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Category_Category" Member="Categories" OtherKey="ParentId" Type="Category" />
+      <Association Name="Category_ArticleCategoryMapping" Member="ArticleCategoryMappings" OtherKey="CategoryId" Type="ArticleCategoryMapping" />
+      <Association Name="Category_Category" Member="Category1" ThisKey="ParentId" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+  <Table Name="dbo.ArticleCategoryMappings" Member="ArticleCategoryMappings">
+    <Type Name="ArticleCategoryMapping">
+      <Column Name="Id" Type="System.Int32" DbType="Int NOT NULL IDENTITY" IsPrimaryKey="true" IsDbGenerated="true" CanBeNull="false" />
+      <Column Name="ArticleId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="CategoryId" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Association Name="Article_ArticleCategoryMapping" Member="Article" ThisKey="ArticleId" Type="Article" IsForeignKey="true" />
+      <Association Name="Category_ArticleCategoryMapping" Member="Category" ThisKey="CategoryId" Type="Category" IsForeignKey="true" />
+    </Type>
+  </Table>
+</Database>

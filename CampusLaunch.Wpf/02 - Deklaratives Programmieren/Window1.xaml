@@ -1,0 +1,21 @@
+﻿<Window x:Class="WPF_Demo_1.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    Title="Window1" Height="382" Width="631">
+    <Grid>
+        <ListBox x:Name="listbox" Margin="8">
+            <ListBoxItem Content="Zeile 1"/>
+            <ListBoxItem Content="Zeile 2"/>
+            <ListBoxItem>
+                <Button>
+                    <ListBox>
+                        <ListBoxItem Content="Zeile 3" />
+                        <ListBoxItem Content="Zeile 4" />
+                    </ListBox>
+
+                </Button>
+            </ListBoxItem>
+        </ListBox>
+        
+    </Grid>
+</Window>

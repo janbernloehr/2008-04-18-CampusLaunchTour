@@ -1,0 +1,87 @@
+﻿<Window x:Class="CampusLaunch.Wpf.Demo06_DataBinding.Window1"
+    xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+    xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+    xmlns:sys="clr-namespace:System;assembly=mscorlib"
+    xmlns:scm="clr-namespace:System.ComponentModel;assembly=WindowsBase"
+    xmlns:local="clr-namespace:CampusLaunch.Wpf.Demo06_DataBinding"
+    Name="MyWindow"
+    Title="Window1" Height="600" Width="800">
+
+    <Window.Resources>
+        <local:EnumMatchToBooleanConverter x:Key="DepartmentMatchToBooleanConverter" />
+
+        <!-- CollectionViewSource für Sortierung, Grouping, Current etc. -->
+        <CollectionViewSource x:Key="persons" Source="{Binding Path=Persons, ElementName=MyWindow}">
+            <CollectionViewSource.SortDescriptions>
+                <scm:SortDescription PropertyName="Name" />
+            </CollectionViewSource.SortDescriptions>
+        </CollectionViewSource>
+
+        <!-- ObjectDataProvider für Enum Werte zu Department -->
+        <ObjectDataProvider MethodName="GetValues" ObjectType="{x:Type sys:Enum}" x:Key="departments">
+            <ObjectDataProvider.MethodParameters>
+                <x:Type TypeName="local:Department"/>
+            </ObjectDataProvider.MethodParameters>
+        </ObjectDataProvider>
+
+        <!-- Standard Click handler für GridView ColumnHeader -->
+        <Style TargetType="{x:Type GridViewColumnHeader}">
+            <EventSetter Event="Click" Handler="OnHeaderClick" />
+        </Style>
+    </Window.Resources>
+
+    <StackPanel Margin="8">
+        <TextBlock Text="Employees" FontWeight="Bold" Margin="0,0,0,10" />
+    
+        <ListView IsSynchronizedWithCurrentItem="True" ItemsSource="{Binding Source={StaticResource persons}}">
+            <ListView.View>
+                <GridView>
+                    <GridViewColumn Header="Name" DisplayMemberBinding="{Binding Name}" />
+
+                    <GridViewColumn Header="Age" DisplayMemberBinding="{Binding Age}"  />
+
+                    <GridViewColumn Header="Department">
+                        <GridViewColumn.CellTemplate>
+                            <DataTemplate>
+                                <ComboBox ItemsSource="{Binding Source={StaticResource departments}}" SelectedValue="{Binding Department}" />
+                            </DataTemplate>
+                        </GridViewColumn.CellTemplate>
+                    </GridViewColumn>
+                </GridView>
+            </ListView.View>
+        </ListView>
+        <TextBlock Text="Employee Details" FontWeight="Bold" Margin="0,10,0,10" />
+        <Grid DataContext="{Binding Source={StaticResource persons}}">
+        <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="0.2*" />
+        <ColumnDefinition />
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        <RowDefinition />
+        </Grid.RowDefinitions>
+            <TextBlock Grid.Row="0">Name:</TextBlock> <TextBox Grid.Column="1" Grid.Row="0" Text="{Binding Name}" />
+            <TextBlock Grid.Row="1">Age:</TextBlock> <TextBox Grid.Column="1" Grid.Row="1">
+            <TextBox.Text>
+            <Binding Path="Age" UpdateSourceTrigger="PropertyChanged">
+            <Binding.ValidationRules>
+            <local:Int32ValidationRule Minimum="0" Maximum="120" />
+            </Binding.ValidationRules>
+            </Binding>
+            </TextBox.Text>
+            </TextBox>
+            <TextBlock Grid.Row="2">Department:</TextBlock> 
+            <StackPanel Grid.Column="1" Grid.Row="2">
+            <RadioButton Content="Management" GroupName="1" IsChecked="{Binding Department, Mode=TwoWay, Converter={StaticResource DepartmentMatchToBooleanConverter}, ConverterParameter=Management}" />
+            <RadioButton Content="Sales" GroupName="2" IsChecked="{Binding Department, Mode=TwoWay, Converter={StaticResource DepartmentMatchToBooleanConverter}, ConverterParameter=Sales}" />
+            <RadioButton Content="IT" GroupName="3" IsChecked="{Binding Department, Mode=TwoWay, Converter={StaticResource DepartmentMatchToBooleanConverter}, ConverterParameter=IT}" />
+            <RadioButton Content="Marketing" GroupName="4" IsChecked="{Binding Department, Mode=TwoWay, Converter={StaticResource DepartmentMatchToBooleanConverter}, ConverterParameter=Marketing}" />
+            </StackPanel>
+            <TextBlock Grid.Row="3">Working part-time:</TextBlock> <CheckBox Grid.Column="1" Grid.Row="3" IsChecked="{Binding IsWorkingPartTime}" />
+            <TextBlock Grid.Row="4">Working at home:</TextBlock> <CheckBox Grid.Column="1" Grid.Row="4" IsChecked="{Binding IsWorkingAtHome}" />
+        </Grid>
+    </StackPanel>
+</Window>

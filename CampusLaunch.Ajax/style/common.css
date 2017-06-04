@@ -1,0 +1,73 @@
+﻿body
+{
+  text-align: center;
+  font-family: Calibri, Arial, Helvetica, Sans-Serif;
+  font-size: 14pt;
+  color: #000;
+}
+
+form
+{
+  background: url(../images/background.png) no-repeat;
+  margin: 0 auto;
+  width: 743px;
+  height: 611px;
+  text-align: left;
+  padding: 100px 24px;
+}
+
+input
+{
+  width: 6em;
+}
+
+label
+{
+  display: inline-block;
+  width: 10em;
+}
+
+ul.book-list
+{
+  margin: 0;
+  padding: 0;
+}
+
+ul.book-list li
+{
+  margin: 0 0 0 50px;
+  padding: 0;
+  list-style-type: none;
+  vertical-align: top;
+  height: 50px;
+}
+
+ul.book-list li img
+{
+  position: absolute;
+  margin-left: -50px;
+}
+
+a:link, a:active, a:visited, a:hover, a:focus
+{
+  color: #CC0000;
+  text-decoration: underline;
+}
+
+#popup
+{
+  display: none;
+  border: solid 1px #999;
+  background: white;
+  padding: 8px;
+}
+
+.vp
+{
+  display: block;
+}
+
+.highlight
+{
+  background: yellow;
+}

@@ -1,0 +1,701 @@
+﻿<UserControl 
+  xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+  xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+  x:Class="Valil.Chess.WinFX.VisualElements.GameBoard2D"
+  Unloaded="ControlUnloaded"
+  Focusable="False"
+  >
+  <UserControl.Resources>
+    <!-- Piece building resources -->
+    <SolidColorBrush x:Key="WhitePieceBackgroundBrush" Color="#aaaaaa"/>
+    <SolidColorBrush x:Key="BlackPieceBackgroundBrush" Color="#ff0000"/>
+    <Pen x:Key="PieceBackgroundPen" Brush="Black" Thickness="2"/>
+    <SolidColorBrush x:Key="PieceShadowBrush" Color="#000000" Opacity=".5"/>
+    <TransformGroup x:Key="PieceTransform">
+      <ScaleTransform  ScaleX="0.8" ScaleY="0.8"/>
+      <TranslateTransform  X="10" Y="10"/>
+    </TransformGroup>
+    <TransformGroup x:Key="PieceShadowTransform">
+      <ScaleTransform  ScaleX="0.8" ScaleY="0.8"/>
+      <TranslateTransform  X="14" Y="14"/>
+    </TransformGroup>
+    <!-- Piece Highlights -->
+    <GradientStopCollection x:Key="PieceHighlightGradientStops">
+      <GradientStop Color="#ffffffff" Offset="0"/>
+      <GradientStop Color="#66ffffff" Offset="0.2"/>
+      <GradientStop Color="#44ffffff" Offset="0.5"/>
+      <GradientStop Color="#44000000" Offset="1"/>
+    </GradientStopCollection>
+    <RadialGradientBrush x:Key="BishopHighlight" GradientOrigin="0.35,0.35" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="35" CenterY="35" ScaleX="0.7" ScaleY="1" />
+          <RotateTransform Angle="30" CenterX="35" CenterY="35"/>
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="KingHighlight" GradientOrigin="0.18,0.28" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="18" CenterY="28" ScaleX="0.7" ScaleY="1" />
+          <RotateTransform Angle="30" CenterX="18" CenterY="28"/>
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="KnightHighlight" GradientOrigin="0.30,0.30" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="30" CenterY="30" ScaleX="0.7" ScaleY="1" />
+          <RotateTransform Angle="30" CenterX="30" CenterY="30"/>
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="PawnHighlight" GradientOrigin="0.43,0.33" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="43" CenterY="33" ScaleX="0.7" ScaleY="1" />
+          <RotateTransform Angle="30" CenterX="43" CenterY="33"/>
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="QueenHighlight" GradientOrigin="0.37,0.25" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="37" CenterY="25" ScaleX="0.7" ScaleY="1" />
+          <RotateTransform Angle="30" CenterX="37" CenterY="25"/>
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <RadialGradientBrush x:Key="RookHighlight" GradientOrigin="0.35,0.50" Center="0.5,0.5" RadiusX="0.6" RadiusY="0.6" GradientStops="{StaticResource PieceHighlightGradientStops}">
+      <RadialGradientBrush.Transform>
+        <TransformGroup>
+          <ScaleTransform CenterX="35" CenterY="50" ScaleX="0.7" ScaleY="1" />
+        </TransformGroup>
+      </RadialGradientBrush.Transform>
+    </RadialGradientBrush>
+    <!-- Piece geometry figures -->
+    <PathFigureCollection x:Key="BishopGeometryFigures">
+      <PathFigure StartPoint="50,90" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <BezierSegment Point1="45,91" Point2="45,97" Point3="40,98"/>
+            <LineSegment Point="5,98"/>
+            <LineSegment Point="1,81"/>
+            <LineSegment Point="28,81"/>
+            <BezierSegment Point1="29,80" Point2="29,75" Point3="30,74"/>
+            <LineSegment Point="70,74"/>
+            <BezierSegment Point1="71,75" Point2="71,80" Point3="72,81"/>
+            <LineSegment Point="99,81"/>
+            <LineSegment Point="95,98"/>
+            <LineSegment Point="60,98"/>
+            <BezierSegment Point1="55,97" Point2="55,91" Point3="50,90"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="70,67" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="30,67"/>
+            <BezierSegment Point1="16,65" Point2="26,28" Point3="40,21"/>
+            <QuadraticBezierSegment Point1="48,30" Point2="48,44"/>
+            <LineSegment Point="54,44"/>
+            <QuadraticBezierSegment Point1="54,30" Point2="46,21"/>
+            <BezierSegment Point1="42,15" Point2="44,3" Point3="52,2"/>
+            <BezierSegment Point1="60,3" Point2="58,12" Point3="57,17"/>
+            <LineSegment Point="60,21"/>
+            <BezierSegment Point1="74,28" Point2="84,65" Point3="70,67"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <PathFigureCollection x:Key="KingGeometryFigures">
+      <PathFigure StartPoint="86,99" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="14,99"/>
+            <QuadraticBezierSegment Point1="14,83" Point2="22,82"/>
+            <QuadraticBezierSegment Point1="50,80" Point2="78,82"/>
+            <QuadraticBezierSegment Point1="86,83" Point2="86,99"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="78,74" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <QuadraticBezierSegment Point1="50,72" Point2="22,74"/>
+            <QuadraticBezierSegment Point1="18,72" Point2="20,67"/>
+            <QuadraticBezierSegment Point1="22,63" Point2="16,56"/>
+            <QuadraticBezierSegment Point1="4,43" Point2="11,28"/>
+            <QuadraticBezierSegment Point1="21,16" Point2="38,23"/>
+            <QuadraticBezierSegment Point1="46,28" Point2="50,38"/>
+            <QuadraticBezierSegment Point1="54,28" Point2="62,23"/>
+            <QuadraticBezierSegment Point1="79,16" Point2="89,28"/>
+            <QuadraticBezierSegment Point1="96,43" Point2="84,56"/>
+            <QuadraticBezierSegment Point1="78,63" Point2="80,67"/>
+            <QuadraticBezierSegment Point1="82,72" Point2="78,74"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="42,10" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="50,34"/>
+            <LineSegment Point="58,10"/>
+            <ArcSegment Size="8,8" RotationAngle="0" IsLargeArc="True" SweepDirection="Counterclockwise" Point="42,10"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="41,58" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <BezierSegment Point1="41,63" Point2="37,63" Point3="37,58"/>
+            <LineSegment Point="33,49"/>
+            <BezierSegment Point1="28,43" Point2="34,39" Point3="37,45"/>
+            <LineSegment Point="41,58"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="59,58" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <BezierSegment Point1="59,63" Point2="63,63" Point3="63,58"/>
+            <LineSegment Point="67,49"/>
+            <BezierSegment Point1="72,43" Point2="66,39" Point3="63,45"/>
+            <LineSegment Point="59,58"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <PathFigureCollection x:Key="KnightGeometryFigures">
+      <PathFigure StartPoint="82,99" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="10,99"/>
+            <QuadraticBezierSegment Point1="10,83" Point2="18,82"/>
+            <QuadraticBezierSegment Point1="46,80" Point2="74,82"/>
+            <QuadraticBezierSegment Point1="82,83" Point2="82,99"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="74,74" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <QuadraticBezierSegment Point1="46,72" Point2="18,74"/>
+            <QuadraticBezierSegment Point1="16,75" Point2="16,70"/>
+            <QuadraticBezierSegment Point1="17,25" Point2="45,16"/>
+            <QuadraticBezierSegment Point1="50,16" Point2="54,13"/>
+            <LineSegment Point="62,4"/>
+            <QuadraticBezierSegment Point1="66,0" Point2="67,5"/>
+            <QuadraticBezierSegment Point1="68,13" Point2="75,19"/>
+            <QuadraticBezierSegment Point1="78,22" Point2="78,28"/>
+            <QuadraticBezierSegment Point1="81,34" Point2="84,38"/>
+            <QuadraticBezierSegment Point1="93,47" Point2="93,55"/>
+            <BezierSegment Point1="93,60" Point2="85,67" Point3="80,60"/>
+            <QuadraticBezierSegment Point1="78,56" Point2="72,54"/>
+            <QuadraticBezierSegment Point1="63,52" Point2="56,46"/>
+            <QuadraticBezierSegment Point1="54,42" Point2="52,45"/>
+            <QuadraticBezierSegment Point1="50,53" Point2="56,58"/>
+            <QuadraticBezierSegment Point1="60,62" Point2="66,65"/>
+            <QuadraticBezierSegment Point1="73,68" Point2="76,72"/>
+            <QuadraticBezierSegment Point1="79,75" Point2="74,74"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <PathFigureCollection x:Key="PawnGeometryFigures">
+      <PathFigure StartPoint="80,89" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="20,89"/>
+            <QuadraticBezierSegment Point1="20,69" Point2="43,55"/>
+            <BezierSegment Point1="30,48" Point2="30,35" Point3="43,28"/>
+            <ArcSegment Size="11,11" RotationAngle="0" IsLargeArc="True" SweepDirection="Clockwise" Point="57,28"/>
+            <BezierSegment Point1="70,35" Point2="70,48" Point3="57,55"/>
+            <QuadraticBezierSegment Point1="80,69" Point2="80,89"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <PathFigureCollection x:Key="QueenGeometryFigures">
+      <PathFigure StartPoint="86,99" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="14,99"/>
+            <QuadraticBezierSegment Point1="14,83" Point2="22,82"/>
+            <QuadraticBezierSegment Point1="50,80" Point2="78,82"/>
+            <QuadraticBezierSegment Point1="86,83" Point2="86,99"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="78,74" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <QuadraticBezierSegment Point1="50,72" Point2="22,74"/>
+            <LineSegment Point="8,37"/>
+            <ArcSegment Size="9,9" RotationAngle="0" IsLargeArc="True" SweepDirection="Clockwise" Point="16,35"/>
+            <LineSegment Point="28,49"/>
+            <LineSegment Point="33,24"/>
+            <ArcSegment Size="9,9" RotationAngle="0" IsLargeArc="True" SweepDirection="Clockwise" Point="42,23"/>
+            <LineSegment Point="50,47"/>
+            <LineSegment Point="58,23"/>
+            <ArcSegment Size="9,9" RotationAngle="0" IsLargeArc="True" SweepDirection="Clockwise" Point="67,24"/>
+            <LineSegment Point="72,49"/>
+            <LineSegment Point="84,35"/>
+            <ArcSegment Size="9,9" RotationAngle="0" IsLargeArc="True" SweepDirection="Clockwise" Point="92,37"/>
+            <LineSegment Point="78,74"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <PathFigureCollection x:Key="RookGeometryFigures">
+      <PathFigure StartPoint="86,99" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <LineSegment Point="14,99"/>
+            <QuadraticBezierSegment Point1="14,83" Point2="22,82"/>
+            <QuadraticBezierSegment Point1="50,80" Point2="78,82"/>
+            <QuadraticBezierSegment Point1="86,83" Point2="86,99"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="78,74" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <QuadraticBezierSegment Point1="50,72" Point2="22,74"/>
+            <LineSegment Point="27,44"/>
+            <QuadraticBezierSegment Point1="50,42" Point2="73,44"/>
+            <LineSegment Point="78,74"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+      <PathFigure StartPoint="73,35" IsClosed="True">
+        <PathFigure.Segments>
+          <PathSegmentCollection>
+            <QuadraticBezierSegment Point1="50,33" Point2="27,35"/>
+            <QuadraticBezierSegment Point1="19,28" Point2="19,23"/>
+            <LineSegment Point="18,9"/>
+            <ArcSegment Size="47,19" RotationAngle="0" IsLargeArc="False" SweepDirection="Counterclockwise" Point="29,7"/>
+            <LineSegment Point="33,20"/>
+            <LineSegment Point="40,20"/>
+            <LineSegment Point="44,5"/>
+            <ArcSegment Size="47,19" RotationAngle="0" IsLargeArc="False" SweepDirection="Counterclockwise" Point="56,5"/>
+            <LineSegment Point="60,20"/>
+            <LineSegment Point="67,20"/>
+            <LineSegment Point="71,7"/>
+            <ArcSegment Size="47,19" RotationAngle="0" IsLargeArc="False" SweepDirection="Counterclockwise" Point="82,9"/>
+            <LineSegment Point="81,23"/>
+            <QuadraticBezierSegment Point1="81,28" Point2="73,35"/>
+          </PathSegmentCollection>
+        </PathFigure.Segments>
+      </PathFigure>
+    </PathFigureCollection>
+    <!-- Piece drawing brushes -->
+    <DrawingBrush x:Key="WhiteBishopBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BishopHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackBishopBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BishopHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource BishopGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="WhiteKingBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource KingHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackKingBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource KingHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KingGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="WhiteKnightBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource KnightHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackKnightBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource KnightHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource KnightGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="WhitePawnBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource PawnHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackPawnBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource PawnHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource PawnGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="WhiteQueenBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource QueenHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackQueenBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource QueenHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource QueenGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="WhiteRookBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource WhitePieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource RookHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="BlackRookBrush" Stretch="Uniform" Viewbox="0,0 100,100" ViewboxUnits="Absolute">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Brush="{StaticResource PieceShadowBrush}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceShadowTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource BlackPieceBackgroundBrush}" Pen="{StaticResource PieceBackgroundPen}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+            <GeometryDrawing Brush="{StaticResource RookHighlight}">
+              <GeometryDrawing.Geometry>
+                <PathGeometry Figures="{StaticResource RookGeometryFigures}" Transform="{StaticResource PieceTransform}"/>
+              </GeometryDrawing.Geometry>
+            </GeometryDrawing>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <!-- Square building resources -->
+    <RectangleGeometry x:Key="SquareBackgroundGeometry1" Rect="0,0 100,100" />
+    <RectangleGeometry x:Key="SquareBackgroundGeometry2" Rect="0,100 100,100" />
+    <RectangleGeometry x:Key="SquareBackgroundGeometry3" Rect="100,0 100,100" />
+    <RectangleGeometry x:Key="SquareBackgroundGeometry4" Rect="100,100 100,100" />
+    <RectangleGeometry x:Key="SquareHighlightGeometry1" Rect="10,10 80,80" />
+    <RectangleGeometry x:Key="SquareHighlightGeometry2" Rect="10,110 80,80" />
+    <RectangleGeometry x:Key="SquareHighlightGeometry3" Rect="110,10 80,80" />
+    <RectangleGeometry x:Key="SquareHighlightGeometry4" Rect="110,110 80,80" />
+    <SolidColorBrush x:Key="WhiteSquareBackgroundBrush" Color="#aaaaaa"/>
+    <SolidColorBrush x:Key="BlackSquareBackgroundBrush" Color="#000000"/>
+    <LinearGradientBrush x:Key="SquareHighlightBrush" StartPoint="0.5,0" EndPoint="0.5,1">
+      <LinearGradientBrush.GradientStops>
+        <GradientStop Color="#ffffffff" Offset="0"/>
+        <GradientStop Color="#80ffffff" Offset="1"/>
+      </LinearGradientBrush.GradientStops>
+    </LinearGradientBrush>
+    <!-- Defines the checkerboard style -->
+    <Style x:Key="Valil.Chess.VisualBoard2DStyle" TargetType="{x:Type Rectangle}">
+      <Setter Property="Fill">
+        <Setter.Value>
+          <DrawingBrush Viewport="0,0,0.25,0.25" TileMode="Tile">
+            <DrawingBrush.Drawing>
+              <DrawingGroup>
+                <DrawingGroup.Children>
+                  <GeometryDrawing Geometry="{StaticResource SquareBackgroundGeometry1}" Brush="{StaticResource WhiteSquareBackgroundBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareBackgroundGeometry2}" Brush="{StaticResource BlackSquareBackgroundBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareBackgroundGeometry3}" Brush="{StaticResource BlackSquareBackgroundBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareBackgroundGeometry4}" Brush="{StaticResource WhiteSquareBackgroundBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareHighlightGeometry1}" Brush="{StaticResource SquareHighlightBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareHighlightGeometry2}" Brush="{StaticResource SquareHighlightBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareHighlightGeometry3}" Brush="{StaticResource SquareHighlightBrush}"/>
+                  <GeometryDrawing Geometry="{StaticResource SquareHighlightGeometry4}" Brush="{StaticResource SquareHighlightBrush}"/>
+                </DrawingGroup.Children>
+              </DrawingGroup>
+            </DrawingBrush.Drawing>
+          </DrawingBrush>
+        </Setter.Value>
+      </Setter>
+    </Style>
+    <!-- Defines the margin text block style -->
+    <Style x:Key="Valil.Chess.2DMarginTextBlockStyle" TargetType="{x:Type TextBlock}">
+      <Setter Property="FontFamily" Value="Arial"/>
+      <Setter Property="FontSize" Value="30"/>
+      <Setter Property="FontWeight" Value="Bold"/>
+      <Setter Property="Foreground" Value="#0f0"/>
+      <Setter Property="HorizontalAlignment" Value="Center"/>
+      <Setter Property="VerticalAlignment" Value="Center"/>
+    </Style>
+    <!-- Selection building resources -->
+    <RectangleGeometry x:Key="SelectionBounds" Rect="0,0 100,100" />
+    <RectangleGeometry x:Key="PieceSelectionGeometry" Rect="20,20 60,60" />
+    <RectangleGeometry x:Key="SquareSelectionGeometry" Rect="30,30 40,40" />
+    <Pen x:Key="SelectionPen" Brush="Red" Thickness="8"/>
+    <DrawingBrush x:Key="PieceSelectionBrush" Stretch="Uniform">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Geometry="{StaticResource SelectionBounds}" Brush="Transparent" />
+            <GeometryDrawing Geometry="{StaticResource PieceSelectionGeometry}" Pen="{StaticResource SelectionPen}"/>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+    <DrawingBrush x:Key="SquareSelectionBrush" Stretch="Uniform">
+      <DrawingBrush.Drawing>
+        <DrawingGroup>
+          <DrawingGroup.Children>
+            <GeometryDrawing Geometry="{StaticResource SelectionBounds}" Brush="Transparent"/>
+            <GeometryDrawing Geometry="{StaticResource SquareSelectionGeometry}" Pen="{StaticResource SelectionPen}"/>
+          </DrawingGroup.Children>
+        </DrawingGroup>
+      </DrawingBrush.Drawing>
+    </DrawingBrush>
+  </UserControl.Resources>
+  <Viewbox Stretch="Uniform">
+    <!-- The game board and its margins -->
+    <!-- It has a static size but it is defined in a Viewbox in order to allow scaling-->
+    <Canvas Name="extendedGameBoard" Background="Black" Width="830" Height="830">
+      <!-- The shadow-->
+      <Rectangle Fill="Black" Opacity=".3" Width="{Binding ElementName=extendedGameBoard,Path=Width,Mode=OneTime}" Height="{Binding ElementName=extendedGameBoard,Path=Height,Mode=OneTime}" Name="shadow">
+        <Rectangle.BitmapEffect>
+          <BlurBitmapEffect Radius="2"/>
+        </Rectangle.BitmapEffect>
+        <Rectangle.RenderTransform>
+          <TranslateTransform X="5" Y="5"/>
+        </Rectangle.RenderTransform>
+      </Rectangle>
+      <!-- The game board -->
+      <Canvas MouseLeftButtonDown="MouseLeftButtonPressed" Name="gameBoard" Canvas.Left="0" Canvas.Top="0" Width="800" Height="800">
+        <!-- The board itself -->
+        <Rectangle Style="{StaticResource Valil.Chess.VisualBoard2DStyle}" Width="{Binding ElementName=gameBoard,Path=Width,Mode=OneTime}" Height="{Binding ElementName=gameBoard,Path=Height,Mode=OneTime}"/>
+        <!-- The layer for displaying the selections-->
+        <Canvas Width="{Binding ElementName=gameBoard,Path=Width,Mode=OneTime}" Height="{Binding ElementName=gameBoard,Path=Height,Mode=OneTime}" Name="selectionLayer">
+          <Rectangle Width="100" Height="100" Name="pieceSelection" Fill="{StaticResource PieceSelectionBrush}"  Visibility="Hidden">
+            <Rectangle.RenderTransform>
+              <TranslateTransform/>
+            </Rectangle.RenderTransform>
+          </Rectangle>
+          <Rectangle Width="100" Height="100" Name="squareSelection" Fill="{StaticResource SquareSelectionBrush}"  Visibility="Hidden">
+            <Rectangle.RenderTransform>
+              <TranslateTransform/>
+            </Rectangle.RenderTransform>
+          </Rectangle>
+        </Canvas>
+        <!-- The layer for displaying the pieces-->
+        <Canvas Width="{Binding ElementName=gameBoard,Path=Width,Mode=OneTime}" Height="{Binding ElementName=gameBoard,Path=Height,Mode=OneTime}" Name="pieceLayer"/>
+      </Canvas>
+      <!-- Vertical board margin -->
+      <UniformGrid Canvas.Left="800" Canvas.Top="0" Width="30" Height="800" Rows="8" Columns="1">
+        <TextBlock x:Name="v1" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v2" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v3" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v4" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v5" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v6" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v7" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="v8" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+      </UniformGrid>
+      <!-- Horizontal board margin -->
+      <UniformGrid Canvas.Left="0" Canvas.Top="800" Width="800" Height="30" Rows="1" Columns="8">
+        <TextBlock x:Name="h1" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h2" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h3" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h4" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h5" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h6" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h7" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+        <TextBlock x:Name="h8" Style="{StaticResource Valil.Chess.2DMarginTextBlockStyle}" />
+      </UniformGrid>
+    </Canvas>
+  </Viewbox>
+</UserControl>

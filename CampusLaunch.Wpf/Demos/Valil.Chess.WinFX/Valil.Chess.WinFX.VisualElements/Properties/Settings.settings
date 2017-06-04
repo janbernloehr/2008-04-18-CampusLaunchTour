@@ -1,0 +1,42 @@
+<?xml version='1.0' encoding='iso-8859-1'?>
+<SettingsFile xmlns="http://schemas.microsoft.com/VisualStudio/2004/01/settings" CurrentProfile="(Default)" GeneratedClassNamespace="Valil.Chess.WinFX.VisualElements.Properties" GeneratedClassName="Settings">
+  <Profiles />
+  <Settings>
+    <Setting Name="RotatedBoard2D" Type="System.Boolean" Scope="User">
+      <Value Profile="(Default)">False</Value>
+    </Setting>
+    <Setting Name="AnimationStartDelay" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">500</Value>
+    </Setting>
+    <Setting Name="AnimationDurationBaseFactor" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">1000</Value>
+    </Setting>
+    <Setting Name="AnimationDurationScaleFactor" Type="System.Int32" Scope="Application">
+      <Value Profile="(Default)">100</Value>
+    </Setting>
+    <Setting Name="Navigation3DAngleAccelerationFactor" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">4</Value>
+    </Setting>
+    <Setting Name="Navigation3DStepAngle" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">5</Value>
+    </Setting>
+    <Setting Name="Navigation3DStepDistance" Type="System.Double" Scope="Application">
+      <Value Profile="(Default)">0.5</Value>
+    </Setting>
+    <Setting Name="ViewableGroupRotation3D" Type="System.Windows.Media.Media3D.Quaternion" Scope="User">
+      <Value Profile="(Default)">Identity</Value>
+    </Setting>
+    <Setting Name="CameraLocation3D" Type="System.Windows.Media.Media3D.Point3D" Scope="User">
+      <Value Profile="(Default)">0,0,50</Value>
+    </Setting>
+    <Setting Name="CameraUpDirection3D" Type="System.Windows.Media.Media3D.Vector3D" Scope="User">
+      <Value Profile="(Default)">0,1,0</Value>
+    </Setting>
+    <Setting Name="CameraLookDirection3D" Type="System.Windows.Media.Media3D.Vector3D" Scope="User">
+      <Value Profile="(Default)">0,0,-50</Value>
+    </Setting>
+    <Setting Name="CameraMatrix3D" Type="System.Windows.Media.Media3D.Matrix3D" Scope="User">
+      <Value Profile="(Default)">Identity</Value>
+    </Setting>
+  </Settings>
+</SettingsFile>
